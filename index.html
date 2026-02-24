@@ -16,7 +16,7 @@
   --serif:'Cormorant Garamond',serif;--sans:'Noto Sans KR',sans-serif;
 }
 html{scroll-behavior:smooth;cursor:none}
-body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:hidden;font-weight:300;cursor:none;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:hidden;font-weight:300;cursor:none;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
 ::selection{background:var(--wine);color:var(--fg2)}
 a,button{cursor:none}::-webkit-scrollbar{width:0}
 
@@ -58,7 +58,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .hero-vertical{position:absolute;top:50%;right:40px;transform:translateY(-50%);font-family:var(--serif);font-size:clamp(6rem,12vw,10rem);
   writing-mode:vertical-rl;color:rgba(196,162,101,.03);font-weight:300;font-style:italic;letter-spacing:.08em;pointer-events:none}
 
-.hero-tag{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.hero-tag{font-size:.48rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:20px;display:flex;align-items:center;gap:10px;white-space:nowrap}
 .hero-tag::before{content:'';width:24px;height:1px;background:var(--gold-dim)}
 .hero-left h1{font-family:var(--serif);font-size:clamp(2.4rem,4.5vw,4rem);line-height:1.15;font-weight:300;font-style:italic;margin-bottom:20px;letter-spacing:.01em}
 .hero-left h1 strong{font-weight:500;color:var(--fg2)}
@@ -73,7 +73,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* 와인빛 글로우 */
 .hero-right::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(122,40,50,.12) 0%,transparent 65%);pointer-events:none}
 .hero-meta{position:absolute;bottom:48px;right:48px;text-align:right;z-index:2}
-.hero-meta span{display:block;font-size:.48rem;color:rgba(221,213,203,.35);letter-spacing:.25em;text-transform:uppercase;line-height:2.6}
+.hero-meta span{display:block;font-size:.48rem;color:rgba(221,213,203,.35);letter-spacing:.25em;text-transform:uppercase;line-height:2.6;white-space:nowrap}
 
 /* hero anim */
 .hero-reveal{opacity:0;transform:translateY(20px);animation:hIn 1.2s cubic-bezier(.16,1,.3,1) forwards}
@@ -83,7 +83,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* ============ SLIDER GALLERY ============ */
 .slider-section{padding:120px 0;position:relative;overflow:hidden}
 .slider-header{padding:0 56px;margin-bottom:48px;max-width:520px}
-.s-label{font-size:.46rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.s-label{font-size:.46rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;display:flex;align-items:center;gap:10px;white-space:nowrap}
 .s-label::before{content:'';width:24px;height:1px;background:var(--gold-dim)}
 .s-title{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.2;font-weight:300;font-style:italic;margin-bottom:12px}
 .s-desc{font-size:.82rem;color:var(--dim);line-height:2.2;font-weight:200}
@@ -103,7 +103,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* 슬라이드 캡션 */
 .slide-caption{position:absolute;bottom:0;left:0;right:0;padding:48px 32px 28px;background:linear-gradient(transparent,rgba(10,9,8,.75));z-index:2}
 .slide-caption h3{font-family:var(--serif);font-size:1.1rem;color:var(--fg2);font-weight:300;font-style:italic;margin-bottom:3px}
-.slide-caption p{font-size:.62rem;color:var(--dim);letter-spacing:.06em}
+.slide-caption p{font-size:.62rem;color:var(--dim);letter-spacing:.06em;white-space:nowrap}
 /* 카운터 */
 .slide-counter{position:absolute;top:24px;right:28px;font-family:var(--serif);font-size:.6rem;color:rgba(196,162,101,.2);letter-spacing:.1em;z-index:2}
 
@@ -117,7 +117,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .quote-section::before{content:'"';position:absolute;top:40px;left:48px;font-family:var(--serif);font-size:clamp(12rem,20vw,18rem);color:rgba(122,40,50,.04);line-height:1;pointer-events:none}
 .quote-main{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.6;font-weight:300;font-style:italic;max-width:640px;margin-bottom:24px;color:var(--fg2)}
 .quote-sub{font-size:.78rem;color:var(--dim);line-height:2;max-width:520px;font-weight:200;margin-bottom:48px}
-.quote-attr{font-size:.52rem;color:var(--gold-dim);letter-spacing:.2em;text-transform:uppercase}
+.quote-attr{font-size:.52rem;color:var(--gold-dim);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
 
 /* 철학 3카드 */
 .philo-cards{display:flex;gap:16px;margin-top:56px}
@@ -145,9 +145,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .mi{padding:12px 0;border-bottom:1px solid rgba(240,235,228,.03);transition:all .35s cubic-bezier(.16,1,.3,1);cursor:default}
 .mi:hover{padding-left:10px;border-color:rgba(122,40,50,.18)}
 .mi-row{display:flex;align-items:baseline}
-.mi-n{font-size:.84rem;font-weight:300}
+.mi-n{font-size:.84rem;font-weight:300;white-space:nowrap}
 .mi-d{flex:1;margin:0 8px;border-bottom:1px dotted rgba(240,235,228,.04)}
-.mi-p{font-family:var(--serif);font-size:.88rem;color:var(--gold)}
+.mi-p{font-family:var(--serif);font-size:.88rem;color:var(--gold);white-space:nowrap}
 .mi-b{display:inline-flex;font-size:.36rem;background:var(--wine);color:var(--fg2);padding:2px 7px;border-radius:2px;margin-left:6px;letter-spacing:.06em;font-weight:700;vertical-align:middle}
 .mi-detail{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1),opacity .3s;opacity:0;font-size:.66rem;color:var(--dim);line-height:1.5;padding-left:2px}
 .mi:hover .mi-detail{max-height:40px;opacity:1;margin-top:4px}
@@ -216,6 +216,14 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
 .rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
 
 
+/* ============ TABLET ============ */
+@media(max-width:1024px) and (min-width:769px){
+  .hero{grid-template-columns:1fr 1fr}
+  .hero-left{padding:0 36px 48px}
+  .philo-cards{flex-direction:column;gap:10px}
+  .info-layout{grid-template-columns:1fr 1fr;gap:32px}
+}
+
 /* ============ WIDESCREEN ============ */
 @media(min-width:1400px){
   .quote-section,.info-section,.mosaic-section,.menu-section{
@@ -226,6 +234,7 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
 }
 /* ============ RESPONSIVE ============ */
 @media(max-width:768px){
+  br{display:none}
   html,body,a,button{cursor:auto}.cur,.cur-ring,.cur-text{display:none}
   .side-nav{display:none}.main{margin-left:0}.top-nav{display:flex}.hbg{display:flex}
   .hero{grid-template-columns:1fr;height:auto;min-height:100vh}
