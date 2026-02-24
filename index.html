@@ -27,12 +27,6 @@ a,button{cursor:none}::-webkit-scrollbar{width:0}
 .cur-text{position:fixed;pointer-events:none;z-index:10001;font-size:.48rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;opacity:0;transition:opacity .3s;font-weight:400}
 .cur-text.show{opacity:1}
 
-/* ============ PHOTO PLACEHOLDER ============ */
-.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100%;gap:10px;position:relative}
-.ph-icon{width:32px;height:32px;opacity:.18}
-.ph-icon svg{width:100%;height:100%;fill:currentColor;color:var(--fg)}
-.ph-text{font-size:.58rem;color:rgba(221,213,203,.12);letter-spacing:.2em;text-transform:uppercase;font-weight:400}
-.ph-label{position:absolute;bottom:14px;left:14px;font-size:.5rem;color:rgba(221,213,203,.2);letter-spacing:.15em;text-transform:uppercase}
 
 /* noise */
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.025;
@@ -75,7 +69,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .hcta-ghost{color:var(--fg);border:1px solid var(--dim2)}.hcta-ghost:hover{border-color:var(--gold-dim);color:var(--gold)}
 
 .hero-right{position:relative;overflow:hidden}
-.hero-right-bg{position:absolute;inset:0;background:linear-gradient(155deg,#1a1210,#0e0a08,#2a1818);display:flex;align-items:center;justify-content:center;font-size:6rem;filter:brightness(.7)}
+.hero-right-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:6rem;filter:brightness(.7)}
 /* 와인빛 글로우 */
 .hero-right::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(122,40,50,.12) 0%,transparent 65%);pointer-events:none}
 .hero-meta{position:absolute;bottom:48px;right:48px;text-align:right;z-index:2}
@@ -102,10 +96,10 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* 좌우 클릭 영역 */
 .sl-zone{position:absolute;top:0;bottom:0;width:15%;z-index:10;cursor:pointer}
 .sl-zone-prev{left:0}.sl-zone-next{right:0}
-.sl-bg-1{background:linear-gradient(155deg,#2a1518,#1a0e10,#3a1820)}
-.sl-bg-2{background:linear-gradient(155deg,#1a1614,#0f0d0b,#241e1a)}
-.sl-bg-3{background:linear-gradient(155deg,#1e1410,#14100e,#281c16)}
-.sl-bg-4{background:linear-gradient(155deg,#180e14,#100a0e,#22141a)}
+.sl-bg-1{background:url('https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=800&q=80') center/cover no-repeat}
+.sl-bg-2{background:url('https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?w=800&q=80') center/cover no-repeat}
+.sl-bg-3{background:url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&q=80') center/cover no-repeat}
+.sl-bg-4{background:url('https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=800&q=80') center/cover no-repeat}
 /* 슬라이드 캡션 */
 .slide-caption{position:absolute;bottom:0;left:0;right:0;padding:48px 32px 28px;background:linear-gradient(transparent,rgba(10,9,8,.75));z-index:2}
 .slide-caption h3{font-family:var(--serif);font-size:1.1rem;color:var(--fg2);font-weight:300;font-style:italic;margin-bottom:3px}
@@ -166,9 +160,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .mos-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.4rem;
   filter:brightness(.65) contrast(1.05);transition:all .7s cubic-bezier(.16,1,.3,1)}
 .mos-cell:hover .mos-inner{filter:brightness(.85);transform:scale(1.06)}
-.ms-1{background:linear-gradient(155deg,#2a1518,#1a0e10)}.ms-2{background:linear-gradient(155deg,#1a1614,#0f0d0b)}
-.ms-3{background:linear-gradient(155deg,#1e1816,#14100e)}.ms-4{background:linear-gradient(155deg,#201418,#14100e)}
-.ms-5{background:linear-gradient(155deg,#1c1210,#0e0a08)}.ms-6{background:linear-gradient(155deg,#221a16,#16100e)}
+.ms-1{background:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80') center/cover no-repeat}.ms-2{background:url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80') center/cover no-repeat}
+.ms-3{background:url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80') center/cover no-repeat}.ms-4{background:url('https://images.unsplash.com/photo-1536935338788-846bb9981813?w=800&q=80') center/cover no-repeat}
+.ms-5{background:url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80') center/cover no-repeat}.ms-6{background:url('https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?w=800&q=80') center/cover no-repeat}
 
 .insta-link{margin-top:20px;font-size:.68rem;color:var(--dim2)}
 .insta-link a{color:var(--gold-dim);text-decoration:none;font-style:italic;transition:color .3s;border-bottom:1px solid rgba(196,162,101,.1);padding-bottom:1px}
@@ -299,7 +293,7 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-right-bg"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">대표 사진</span></div></div>
+    <div class="hero-right-bg"></div>
     <div class="hero-meta hero-reveal hr-d4">
       <span>Tue — Sun</span>
       <span>18:00 — 01:00</span>
@@ -319,22 +313,22 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     <div class="sl-zone sl-zone-next" id="slZoneNext"></div>
     <div class="slider-track" id="sliderTrack">
       <div class="slide" data-hover="View">
-        <div class="slide-inner sl-bg-1"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">공간 사진</span></div></div>
+        <div class="slide-inner sl-bg-1"></div>
         <div class="slide-caption"><h3>바 카운터</h3><p>소믈리에와 마주 앉는 6석</p></div>
         <span class="slide-counter">01 / 04</span>
       </div>
       <div class="slide" data-hover="View">
-        <div class="slide-inner sl-bg-2"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">공간 사진</span></div></div>
+        <div class="slide-inner sl-bg-2"></div>
         <div class="slide-caption"><h3>캔들 테이블</h3><p>2인 프라이빗 테이블석</p></div>
         <span class="slide-counter">02 / 04</span>
       </div>
       <div class="slide" data-hover="View">
-        <div class="slide-inner sl-bg-3"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">공간 사진</span></div></div>
+        <div class="slide-inner sl-bg-3"></div>
         <div class="slide-caption"><h3>레코드 코너</h3><p>매일 밤 다른 재즈 앨범</p></div>
         <span class="slide-counter">03 / 04</span>
       </div>
       <div class="slide" data-hover="View">
-        <div class="slide-inner sl-bg-4"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">공간 사진</span></div></div>
+        <div class="slide-inner sl-bg-4"></div>
         <div class="slide-caption"><h3>와인 셀러</h3><p>80여 종의 내추럴 와인</p></div>
         <span class="slide-counter">04 / 04</span>
       </div>
@@ -415,12 +409,12 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   <div class="s-label">Photo</div>
   <h2 class="s-title" style="margin-bottom:32px">라루쥬의 밤</h2>
   <div class="mosaic">
-    <div class="mos-cell tall rv"><div class="mos-inner ms-1"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
-    <div class="mos-cell wide rv rv-d1"><div class="mos-inner ms-2"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
-    <div class="mos-cell rv rv-d2"><div class="mos-inner ms-3"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
-    <div class="mos-cell rv rv-d3"><div class="mos-inner ms-4"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
-    <div class="mos-cell wide rv"><div class="mos-inner ms-5"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
-    <div class="mos-cell rv rv-d1"><div class="mos-inner ms-6"><div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div></div></div>
+    <div class="mos-cell tall rv"><div class="mos-inner ms-1"></div></div>
+    <div class="mos-cell wide rv rv-d1"><div class="mos-inner ms-2"></div></div>
+    <div class="mos-cell rv rv-d2"><div class="mos-inner ms-3"></div></div>
+    <div class="mos-cell rv rv-d3"><div class="mos-inner ms-4"></div></div>
+    <div class="mos-cell wide rv"><div class="mos-inner ms-5"></div></div>
+    <div class="mos-cell rv rv-d1"><div class="mos-inner ms-6"></div></div>
   </div>
   <p class="insta-link">더 많은 사진은 <a href="https://instagram.com/larouge.bar" target="_blank" rel="noopener noreferrer">@larouge.bar</a></p>
 </section>
@@ -593,13 +587,13 @@ window.addEventListener('scroll',()=>{
 const lb=document.getElementById('lb'),lbInner=document.getElementById('lbInner'),lbTitle=document.getElementById('lbTitle'),lbDesc=document.getElementById('lbDesc'),lbCap=document.getElementById('lbCap'),lbCount=document.getElementById('lbCount');
 const lbItems=[];let lbIdx=0;
 const bgMap={
-  'sl-bg-1':'linear-gradient(155deg,#2a1518,#1a0e10,#3a1820)','sl-bg-2':'linear-gradient(155deg,#1a1614,#0f0d0b,#241e1a)',
-  'sl-bg-3':'linear-gradient(155deg,#1e1410,#14100e,#281c16)','sl-bg-4':'linear-gradient(155deg,#180e14,#100a0e,#22141a)',
-  'ms-1':'linear-gradient(155deg,#2a1518,#1a0e10)','ms-2':'linear-gradient(155deg,#1a1614,#0f0d0b)',
-  'ms-3':'linear-gradient(155deg,#1e1816,#14100e)','ms-4':'linear-gradient(155deg,#201418,#14100e)',
-  'ms-5':'linear-gradient(155deg,#1c1210,#0e0a08)','ms-6':'linear-gradient(155deg,#221a16,#16100e)'
+  'sl-bg-1':'url(https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=1200&q=80) center/cover no-repeat','sl-bg-2':'url(https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?w=1200&q=80) center/cover no-repeat',
+  'sl-bg-3':'url(https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=1200&q=80) center/cover no-repeat','sl-bg-4':'url(https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=1200&q=80) center/cover no-repeat',
+  'ms-1':'url(https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80) center/cover no-repeat','ms-2':'url(https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80) center/cover no-repeat',
+  'ms-3':'url(https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&q=80) center/cover no-repeat','ms-4':'url(https://images.unsplash.com/photo-1536935338788-846bb9981813?w=1200&q=80) center/cover no-repeat',
+  'ms-5':'url(https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1200&q=80) center/cover no-repeat','ms-6':'url(https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?w=1200&q=80) center/cover no-repeat'
 };
-const phSVG='<div class="ph"><div class="ph-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div><span class="ph-text">사진</span></div>';
+
 
 // 슬라이더 원본 4장 수집
 origSlides.forEach(s=>{
@@ -625,7 +619,7 @@ function closeLb(){lb.classList.remove('open');document.body.style.overflow='';
 function renderLb(){
   const item=lbItems[lbIdx];if(!item)return;
   lbInner.style.opacity='0';
-  setTimeout(()=>{lbInner.style.background=bgMap[item.bg]||'var(--surface)';lbInner.innerHTML=phSVG;lbInner.style.opacity='1'},150);
+  setTimeout(()=>{lbInner.style.background=bgMap[item.bg]||'var(--surface)';lbInner.innerHTML='';lbInner.style.opacity='1'},150);
   if(item.title){lbCap.style.display='';lbTitle.textContent=item.title;lbDesc.textContent=item.desc}
   else{lbCap.style.display='none'}
   lbCount.textContent=`${lbIdx+1} / ${lbItems.length}`;
