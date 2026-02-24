@@ -69,7 +69,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .hcta-ghost{color:var(--fg);border:1px solid var(--dim2)}.hcta-ghost:hover{border-color:var(--gold-dim);color:var(--gold)}
 
 .hero-right{position:relative;overflow:hidden}
-.hero-right-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:6rem;filter:brightness(.7)}
+.hero-right-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=800&q=80') center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:6rem;filter:brightness(.7)}
 /* 와인빛 글로우 */
 .hero-right::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(122,40,50,.12) 0%,transparent 65%);pointer-events:none}
 .hero-meta{position:absolute;bottom:48px;right:48px;text-align:right;z-index:2}
@@ -90,7 +90,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 
 .slider-wrap{position:relative;overflow:hidden}
 .slider-track{display:flex;transition:transform .7s cubic-bezier(.16,1,.3,1)}
-.slide{flex:0 0 70%;height:480px;position:relative;overflow:hidden;margin-right:16px}
+.slide{flex:0 0 70%;height:480px;position:relative;overflow:hidden;margin-right:2%}
 .slide-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;filter:brightness(.75) contrast(1.05);transition:filter .6s}
 .slide:hover .slide-inner{filter:brightness(.85)}
 /* 좌우 클릭 영역 */
@@ -154,7 +154,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 
 /* ============ PHOTO MOSAIC ============ */
 .mosaic-section{padding:100px 56px}
-.mosaic{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:3px;max-width:960px;margin:0 auto}
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:200px;gap:3px;max-width:960px;margin:0 auto}
 .mos-cell{overflow:hidden;position:relative;cursor:default}
 .mos-cell.tall{grid-row:span 2}.mos-cell.wide{grid-column:span 2}
 .mos-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.4rem;
@@ -162,7 +162,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .mos-cell:hover .mos-inner{filter:brightness(.85);transform:scale(1.06)}
 .ms-1{background:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80') center/cover no-repeat}.ms-2{background:url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80') center/cover no-repeat}
 .ms-3{background:url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=800&q=80') center/cover no-repeat}.ms-4{background:url('https://images.unsplash.com/photo-1536935338788-846bb9981813?w=800&q=80') center/cover no-repeat}
-.ms-5{background:url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&q=80') center/cover no-repeat}.ms-6{background:url('https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?w=800&q=80') center/cover no-repeat}
 
 .insta-link{margin-top:20px;font-size:.68rem;color:var(--dim2)}
 .insta-link a{color:var(--gold-dim);text-decoration:none;font-style:italic;transition:color .3s;border-bottom:1px solid rgba(196,162,101,.1);padding-bottom:1px}
@@ -237,7 +236,7 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   .hero-desc{font-size:.78rem}
   .hcta{padding:12px 20px;font-size:.7rem}
   .slider-section{padding:80px 0}.slider-header{padding:0 24px}
-  .slide{flex:0 0 85%;height:280px}
+  .slide{flex:0 0 85%;height:280px;margin-right:2%}
   .slider-arrows{padding:16px 24px}
   .sl-arrow{width:40px;height:40px}
   .quote-section{padding:80px 24px}.quote-main{font-size:clamp(1.2rem,5vw,1.6rem)}.philo-cards{flex-direction:column;gap:10px}
@@ -413,8 +412,6 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     <div class="mos-cell wide rv rv-d1"><div class="mos-inner ms-2"></div></div>
     <div class="mos-cell rv rv-d2"><div class="mos-inner ms-3"></div></div>
     <div class="mos-cell rv rv-d3"><div class="mos-inner ms-4"></div></div>
-    <div class="mos-cell wide rv"><div class="mos-inner ms-5"></div></div>
-    <div class="mos-cell rv rv-d1"><div class="mos-inner ms-6"></div></div>
   </div>
   <p class="insta-link">더 많은 사진은 <a href="https://instagram.com/larouge.bar" target="_blank" rel="noopener noreferrer">@larouge.bar</a></p>
 </section>
@@ -497,7 +494,7 @@ track.appendChild(firstClone);track.insertBefore(lastClone,track.firstChild);
 const allSlides=track.querySelectorAll('.slide');
 let idx=1,snapTimer=null;
 
-function getOffset(){return window.innerWidth<=768?87:72}
+function getOffset(){if(window.innerWidth<=768)return 87;if(window.innerWidth>=1400)return 57;return 72}
 
 function applyVisuals(){
   allSlides.forEach((s,i)=>{s.style.opacity=i===idx?'1':'.4'});
@@ -590,8 +587,7 @@ const bgMap={
   'sl-bg-1':'url(https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=1200&q=80) center/cover no-repeat','sl-bg-2':'url(https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?w=1200&q=80) center/cover no-repeat',
   'sl-bg-3':'url(https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=1200&q=80) center/cover no-repeat','sl-bg-4':'url(https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=1200&q=80) center/cover no-repeat',
   'ms-1':'url(https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80) center/cover no-repeat','ms-2':'url(https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80) center/cover no-repeat',
-  'ms-3':'url(https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&q=80) center/cover no-repeat','ms-4':'url(https://images.unsplash.com/photo-1536935338788-846bb9981813?w=1200&q=80) center/cover no-repeat',
-  'ms-5':'url(https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1200&q=80) center/cover no-repeat','ms-6':'url(https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?w=1200&q=80) center/cover no-repeat'
+  'ms-3':'url(https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&q=80) center/cover no-repeat','ms-4':'url(https://images.unsplash.com/photo-1536935338788-846bb9981813?w=1200&q=80) center/cover no-repeat'
 };
 
 
