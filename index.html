@@ -7,18 +7,92 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarOrNightClub",
+  "name": "라루쥬 La Rouge",
+  "description": "서촌 골목 내추럴 와인바. 소믈리에가 고른 와인과 시그니처 칵테일.",
+  "url": "https://dongboweb-larouge.vercel.app",
+  "telephone": "02-000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "자하문로 00길 8, B1",
+    "addressLocality": "종로구",
+    "addressRegion": "서울",
+    "postalCode": "03041",
+    "addressCountry": "KR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 37.5788,
+    "longitude": 126.9720
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "18:00",
+      "closes": "01:00"
+    }
+  ],
+  "servesCuisine": ["Natural Wine", "Craft Cocktail", "Tapas"],
+  "priceRange": "₩₩",
+  "image": "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=1200&q=80",
+  "sameAs": ["https://instagram.com/larouge.bar"]
+}
+</script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0908;--bg2:#12100e;--surface:#181614;
-  --fg:#ddd5cb;--fg2:#f0ebe4;--dim:#8a7e76;--dim2:#6a6058;
-  --wine:#7a2832;--wine-glow:#a83a48;--gold:#c4a265;--gold-dim:#9a8960;
-  --serif:'Cormorant Garamond',serif;--sans:'Noto Sans KR',sans-serif;
+  --bg:#0a0908;
+  --bg2:#12100e;
+  --surface:#181614;
+  --fg:#ddd5cb;
+  --fg2:#f0ebe4;
+  --dim:#8a7e76;
+  --dim2:#6a6058;
+  --wine:#7a2832;
+  --wine-glow:#a83a48;
+  --gold:#c4a265;
+  --gold-dim:#9a8960;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Noto Sans KR',sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-smooth:cubic-bezier(.4,0,.2,1);
 }
 html{scroll-behavior:smooth;cursor:none}
 body{font-family:var(--sans);background:var(--bg);color:var(--fg);overflow-x:hidden;font-weight:300;cursor:none;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
 ::selection{background:var(--wine);color:var(--fg2)}
 a,button{cursor:none}::-webkit-scrollbar{width:0}
+
+/* ============ PRELOADER ============ */
+.preloader{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+.preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+.pre-brand{display:flex;gap:2px;font-family:var(--serif);font-size:clamp(2.4rem,5vw,3.6rem);font-weight:300;font-style:italic;color:var(--fg2);overflow:hidden}
+.pre-char{display:inline-block;opacity:0;transform:translateY(30px);animation:preCharIn .5s ease forwards}
+@keyframes preCharIn{to{opacity:1;transform:translateY(0)}}
+.pre-line{width:60px;height:1px;background:linear-gradient(90deg,var(--wine),var(--wine-glow));margin-top:16px;transform:scaleX(0);transform-origin:left;animation:preLineIn .8s .6s ease forwards}
+@keyframes preLineIn{to{transform:scaleX(1)}}
+.pre-sub{font-size:.6rem;color:var(--dim);letter-spacing:.35em;text-transform:uppercase;margin-top:12px;opacity:0;animation:preFade .5s .9s ease forwards}
+@keyframes preFade{to{opacity:1}}
+
+/* ============ SCROLL PROGRESS ============ */
+.scroll-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:9990;background:transparent}
+.scroll-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--wine),var(--wine-glow));transition:width .1s linear}
+
+/* ============ TOAST ============ */
+.toast-container{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);z-index:9995;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.toast{background:rgba(24,22,20,.95);border:1px solid rgba(196,162,101,.12);color:var(--fg);padding:12px 24px;font-size:.72rem;letter-spacing:.04em;opacity:0;transform:translateY(16px);transition:all .4s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ============ BACK TO TOP ============ */
+.btt{position:fixed;bottom:96px;right:28px;width:42px;height:42px;border-radius:50%;background:var(--wine);border:none;color:var(--fg2);font-size:.8rem;display:flex;align-items:center;justify-content:center;z-index:89;opacity:0;transform:translateY(12px);transition:all .4s cubic-bezier(.16,1,.3,1);pointer-events:none;cursor:none}
+.btt.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.btt:hover{background:var(--wine-glow);transform:translateY(-2px)}
 
 /* ============ CURSOR ============ */
 .cur{position:fixed;width:5px;height:5px;border-radius:50%;background:var(--gold);pointer-events:none;z-index:10000}
@@ -46,7 +120,22 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 /* 모바일 상단 nav */
 .top-nav{display:none;position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 20px;background:rgba(10,9,8,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,162,101,.04);justify-content:space-between;align-items:center}
 .tn-logo{font-family:var(--serif);font-size:1rem;color:var(--fg);text-decoration:none;font-weight:300;font-style:italic}
-.hbg{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px}.hbg span{width:18px;height:1px;background:var(--fg);display:block}
+.hbg{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px;position:relative;width:24px;height:24px;justify-content:center;z-index:310}
+.hbg span{width:18px;height:1px;background:var(--fg);display:block;transition:all .3s cubic-bezier(.16,1,.3,1)}
+.hbg.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* ============ MOBILE OVERLAY ============ */
+.mob-overlay{position:fixed;inset:0;z-index:300;background:rgba(10,9,8,.97);backdrop-filter:blur(24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.mob-overlay.open{opacity:1;visibility:visible}
+.mob-overlay a{font-family:var(--serif);font-size:clamp(1.4rem,5vw,2rem);color:var(--fg);text-decoration:none;font-weight:300;font-style:italic;letter-spacing:.06em;opacity:0;transform:translateY(16px);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.mob-overlay.open a{opacity:1;transform:translateY(0)}
+.mob-overlay a:nth-child(1){transition-delay:.05s}.mob-overlay a:nth-child(2){transition-delay:.1s}
+.mob-overlay a:nth-child(3){transition-delay:.15s}.mob-overlay a:nth-child(4){transition-delay:.2s}
+.mob-overlay a:nth-child(5){transition-delay:.25s}.mob-overlay a:nth-child(6){transition-delay:.3s}
+.mob-overlay a:nth-child(7){transition-delay:.35s}
+.mob-overlay a:hover{color:var(--gold)}
 
 /* 메인 콘텐츠 오프셋 */
 .main{margin-left:64px}
@@ -112,9 +201,123 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .sl-arrow{width:44px;height:44px;border:1px solid var(--dim2);background:none;color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .3s;cursor:none}
 .sl-arrow:hover{border-color:var(--gold);color:var(--gold)}
 
+/* ============ SOMMELIER'S PICK ============ */
+.pick-section{
+  padding:100px 56px;
+  border-top:1px solid rgba(196,162,101,.04);
+}
+.pick-card{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:48px;
+  max-width:860px;
+  margin:48px auto 0;
+  background:rgba(240,235,228,.015);
+  border:1px solid rgba(196,162,101,.06);
+  overflow:hidden;
+  transition:border-color .5s var(--ease-out);
+}
+.pick-card:hover{
+  border-color:rgba(196,162,101,.12);
+}
+.pick-img{
+  height:100%;
+  min-height:360px;
+  background:url('https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=800&q=80') center/cover no-repeat;
+  position:relative;
+  transition:filter .6s;
+}
+.pick-card:hover .pick-img{
+  filter:brightness(1.05);
+}
+.pick-img::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent 60%,var(--bg) 100%);
+}
+.pick-body{
+  padding:40px 40px 40px 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.pick-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:.5rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--wine-glow);
+  margin-bottom:20px;
+  white-space:nowrap;
+}
+.pick-dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--wine-glow);
+  animation:pickPulse 2s ease infinite;
+}
+@keyframes pickPulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.7)}
+}
+.pick-name{
+  font-family:var(--serif);
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--fg2);
+  margin-bottom:6px;
+}
+.pick-region{
+  font-size:.68rem;
+  color:var(--dim);
+  margin-bottom:4px;
+}
+.pick-grape{
+  font-size:.62rem;
+  color:var(--gold-dim);
+  letter-spacing:.1em;
+  margin-bottom:16px;
+}
+.pick-desc{
+  font-size:.78rem;
+  color:var(--dim);
+  line-height:2;
+  font-weight:200;
+  margin-bottom:20px;
+}
+.pick-price{
+  font-family:var(--serif);
+  font-size:1.4rem;
+  color:var(--gold);
+  font-weight:400;
+}
+.pick-tags{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+.pick-tag{
+  font-size:.52rem;
+  padding:4px 12px;
+  border:1px solid rgba(122,40,50,.3);
+  color:var(--wine-glow);
+  letter-spacing:.08em;
+  transition:all .3s;
+}
+.pick-tag:hover{
+  background:rgba(122,40,50,.1);
+  border-color:rgba(122,40,50,.5);
+}
+
 /* ============ QUOTE / PHILOSOPHY ============ */
 .quote-section{padding:140px 56px;position:relative;border-top:1px solid rgba(196,162,101,.04);border-bottom:1px solid rgba(196,162,101,.04);overflow:hidden}
-.quote-section::before{content:'"';position:absolute;top:40px;left:48px;font-family:var(--serif);font-size:clamp(12rem,20vw,18rem);color:rgba(122,40,50,.04);line-height:1;pointer-events:none}
+.quote-section::before{content:'\201C';position:absolute;top:40px;left:48px;font-family:var(--serif);font-size:clamp(12rem,20vw,18rem);color:rgba(122,40,50,.04);line-height:1;pointer-events:none}
 .quote-main{font-family:var(--serif);font-size:clamp(1.4rem,2.8vw,2.2rem);line-height:1.6;font-weight:300;font-style:italic;max-width:640px;margin-bottom:24px;color:var(--fg2)}
 .quote-sub{font-size:.78rem;color:var(--dim);line-height:2;max-width:520px;font-weight:200;margin-bottom:48px}
 .quote-attr{font-size:.52rem;color:var(--gold-dim);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
@@ -127,6 +330,96 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .pc:hover .pc-icon{opacity:.8;transform:scale(1.1)}
 .pc h4{font-family:var(--serif);font-size:.95rem;font-weight:400;font-style:italic;margin-bottom:6px;color:var(--fg2)}
 .pc p{font-size:.68rem;color:var(--dim);line-height:1.8;font-weight:200}
+
+/* ============ WINE TASTING NOTES ============ */
+.notes-section{
+  padding:120px 56px;
+  border-bottom:1px solid rgba(196,162,101,.04);
+}
+.notes-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  max-width:960px;
+  margin:48px auto 0;
+}
+.note-card{
+  background:rgba(240,235,228,.02);
+  border:1px solid rgba(196,162,101,.06);
+  padding:32px 28px;
+  transition:all .5s var(--ease-out);
+}
+.note-card:hover{
+  border-color:rgba(196,162,101,.12);
+  background:rgba(196,162,101,.03);
+}
+.note-type{
+  font-size:.44rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--wine-glow);
+  margin-bottom:16px;
+  font-weight:500;
+}
+.note-name{
+  font-family:var(--serif);
+  font-size:1.2rem;
+  font-weight:300;
+  font-style:italic;
+  color:var(--fg2);
+  margin-bottom:4px;
+}
+.note-region{
+  font-size:.62rem;
+  color:var(--dim);
+  margin-bottom:6px;
+}
+.note-flavor{
+  font-size:.68rem;
+  color:var(--gold-dim);
+  font-style:italic;
+  margin-bottom:24px;
+  line-height:1.6;
+}
+.note-bars{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.note-bar{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.note-bar-label{
+  font-size:.52rem;
+  color:var(--dim);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  width:60px;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.note-bar-track{
+  flex:1;
+  height:3px;
+  background:rgba(240,235,228,.04);
+  position:relative;
+  overflow:hidden;
+}
+.note-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--wine),var(--wine-glow));
+  width:0%;
+  transition:width 1.2s var(--ease-out);
+}
+.note-bar-val{
+  font-size:.48rem;
+  color:var(--dim2);
+  width:20px;
+  text-align:right;
+  white-space:nowrap;
+}
 
 /* ============ MENU — 탭 전환 ============ */
 .menu-section{padding:140px 56px;background:var(--bg)}
@@ -142,8 +435,15 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .tab-panel.active{display:block}
 @keyframes tabIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+/* Wine Filter Tags */
+.wine-tags{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.wine-tag{padding:6px 16px;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dim);border:1px solid rgba(196,162,101,.08);background:none;cursor:none;transition:all .3s cubic-bezier(.16,1,.3,1);font-family:var(--sans);font-weight:300}
+.wine-tag.active{color:var(--gold);border-color:var(--gold);background:rgba(196,162,101,.06)}
+.wine-tag:hover{border-color:var(--gold-dim);color:var(--fg)}
+
 .mi{padding:12px 0;border-bottom:1px solid rgba(240,235,228,.03);transition:all .35s cubic-bezier(.16,1,.3,1);cursor:default}
 .mi:hover{padding-left:10px;border-color:rgba(122,40,50,.18)}
+.mi.wine-hidden{opacity:.15;transform:scale(.98);pointer-events:none}
 .mi-row{display:flex;align-items:baseline}
 .mi-n{font-size:.84rem;font-weight:300;white-space:nowrap}
 .mi-d{flex:1;margin:0 8px;border-bottom:1px dotted rgba(240,235,228,.04)}
@@ -151,6 +451,246 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .mi-b{display:inline-flex;font-size:.36rem;background:var(--wine);color:var(--fg2);padding:2px 7px;border-radius:2px;margin-left:6px;letter-spacing:.06em;font-weight:700;vertical-align:middle}
 .mi-detail{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1),opacity .3s;opacity:0;font-size:.66rem;color:var(--dim);line-height:1.5;padding-left:2px}
 .mi:hover .mi-detail{max-height:40px;opacity:1;margin-top:4px}
+
+/* ============ PAIRING GUIDE ============ */
+.pair-section{
+  padding:120px 56px;
+  border-top:1px solid rgba(196,162,101,.04);
+}
+.pair-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  max-width:960px;
+  margin:48px auto 0;
+}
+.pair-card{
+  background:rgba(240,235,228,.02);
+  border:1px solid rgba(196,162,101,.06);
+  padding:36px 28px;
+  text-align:center;
+  transition:all .5s var(--ease-out);
+}
+.pair-card:hover{
+  border-color:rgba(196,162,101,.12);
+  background:rgba(196,162,101,.03);
+  transform:translateY(-4px);
+}
+.pair-icon{
+  font-size:2rem;
+  margin-bottom:16px;
+  opacity:.6;
+  transition:opacity .4s;
+}
+.pair-card:hover .pair-icon{
+  opacity:.9;
+}
+.pair-wine{
+  font-family:var(--serif);
+  font-size:1rem;
+  font-weight:300;
+  font-style:italic;
+  color:var(--fg2);
+  margin-bottom:4px;
+}
+.pair-plus{
+  font-size:.6rem;
+  color:var(--dim2);
+  margin-bottom:4px;
+  letter-spacing:.2em;
+}
+.pair-food{
+  font-size:.9rem;
+  color:var(--gold);
+  font-weight:400;
+  margin-bottom:14px;
+}
+.pair-desc{
+  font-size:.68rem;
+  color:var(--dim);
+  line-height:1.8;
+  font-weight:200;
+}
+
+/* ============ FAQ ============ */
+.faq-section{
+  padding:120px 56px;
+  border-top:1px solid rgba(196,162,101,.04);
+}
+.faq-list{
+  max-width:680px;
+  margin:48px auto 0;
+}
+.faq-item{
+  border-bottom:1px solid rgba(196,162,101,.06);
+}
+.faq-q{
+  width:100%;
+  background:none;
+  border:none;
+  color:var(--fg);
+  text-align:left;
+  padding:20px 0;
+  font-size:.84rem;
+  font-weight:300;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  cursor:none;
+  transition:color .3s;
+  font-family:var(--sans);
+}
+.faq-q:hover{
+  color:var(--gold);
+}
+.faq-q span{
+  flex:1;
+}
+.faq-q-icon{
+  font-family:var(--serif);
+  font-size:1rem;
+  color:var(--dim2);
+  transition:transform .4s var(--ease-out);
+  flex-shrink:0;
+}
+.faq-item.open .faq-q-icon{
+  transform:rotate(45deg);
+}
+.faq-item.open .faq-q{
+  color:var(--gold);
+}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .5s var(--ease-out),opacity .3s;
+  opacity:0;
+}
+.faq-item.open .faq-a{
+  max-height:200px;
+  opacity:1;
+}
+.faq-a p{
+  font-size:.76rem;
+  color:var(--dim);
+  line-height:2;
+  font-weight:200;
+  padding:0 0 20px;
+}
+
+/* ============ EVENT BANNER ============ */
+.event-banner{
+  padding:56px;
+  background:linear-gradient(135deg,var(--wine),rgba(168,58,72,.8));
+  position:relative;
+  overflow:hidden;
+}
+.event-banner::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 80% 30%,rgba(196,162,101,.08) 0%,transparent 60%);
+  pointer-events:none;
+}
+.event-inner{
+  max-width:680px;
+  position:relative;
+  z-index:1;
+}
+.event-label{
+  font-size:.46rem;
+  letter-spacing:.4em;
+  text-transform:uppercase;
+  color:rgba(240,235,228,.5);
+  margin-bottom:14px;
+  white-space:nowrap;
+}
+.event-title{
+  font-family:var(--serif);
+  font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--fg2);
+  margin-bottom:10px;
+}
+.event-desc{
+  font-size:.78rem;
+  color:rgba(240,235,228,.7);
+  line-height:2;
+  font-weight:200;
+}
+.event-cta{
+  display:inline-flex;
+  margin-top:20px;
+  padding:10px 24px;
+  font-size:.68rem;
+  color:var(--fg2);
+  border:1px solid rgba(240,235,228,.3);
+  text-decoration:none;
+  letter-spacing:.1em;
+  transition:all .4s var(--ease-out);
+}
+.event-cta:hover{
+  background:rgba(240,235,228,.1);
+  border-color:rgba(240,235,228,.5);
+  transform:translateY(-2px);
+}
+
+/* ============ REVIEWS ============ */
+.reviews-section{
+  padding:120px 56px;
+  border-top:1px solid rgba(196,162,101,.04);
+  overflow:hidden;
+}
+.reviews-track{
+  display:flex;
+  gap:24px;
+  max-width:960px;
+  margin:48px auto 0;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:16px;
+  scrollbar-width:none;
+}
+.reviews-track::-webkit-scrollbar{display:none}
+.review-card{
+  flex:0 0 320px;
+  scroll-snap-align:start;
+  background:rgba(240,235,228,.02);
+  border:1px solid rgba(196,162,101,.06);
+  padding:32px 28px;
+  transition:all .5s var(--ease-out);
+}
+.review-card:hover{
+  border-color:rgba(196,162,101,.12);
+  background:rgba(196,162,101,.03);
+}
+.review-stars{
+  color:var(--gold);
+  font-size:.7rem;
+  letter-spacing:2px;
+  margin-bottom:16px;
+}
+.review-text{
+  font-size:.76rem;
+  color:var(--dim);
+  line-height:2;
+  font-weight:200;
+  margin-bottom:16px;
+  font-style:italic;
+}
+.review-author{
+  font-size:.6rem;
+  color:var(--dim2);
+  letter-spacing:.1em;
+}
+.review-date{
+  font-size:.48rem;
+  color:var(--dim2);
+  margin-top:4px;
+  letter-spacing:.06em;
+}
 
 /* ============ PHOTO MOSAIC ============ */
 .mosaic-section{padding:100px 56px}
@@ -177,9 +717,97 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 .map-btn:hover{background:var(--wine);color:var(--fg2);border-color:var(--wine);transform:translateY(-2px)}
 
 /* ============ FOOTER ============ */
-footer{padding:40px 56px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(196,162,101,.04)}
-footer p{font-size:.55rem;color:var(--dim2);letter-spacing:.1em}
-footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:italic;transition:color .3s}footer a:hover{color:var(--gold)}
+.footer-main{
+  padding:80px 56px 0;
+  border-top:1px solid rgba(196,162,101,.06);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:40px;
+  max-width:960px;
+  margin:0 auto;
+}
+.footer-col h5{
+  font-size:.44rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--gold-dim);
+  margin-bottom:16px;
+  font-weight:400;
+}
+.footer-brand{
+  font-family:var(--serif);
+  font-size:1.4rem;
+  font-weight:300;
+  font-style:italic;
+  color:var(--fg2);
+  margin-bottom:10px;
+}
+.footer-col p{
+  font-size:.72rem;
+  color:var(--dim);
+  line-height:2;
+  font-weight:200;
+}
+.footer-col a{
+  display:block;
+  font-size:.72rem;
+  color:var(--dim);
+  text-decoration:none;
+  line-height:2.4;
+  font-weight:200;
+  transition:color .3s;
+}
+.footer-col a:hover{
+  color:var(--gold);
+}
+.footer-social{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+.footer-social a{
+  display:inline-flex;
+  width:32px;
+  height:32px;
+  border:1px solid rgba(196,162,101,.1);
+  align-items:center;
+  justify-content:center;
+  transition:all .3s;
+  font-size:.7rem;
+  color:var(--dim);
+}
+.footer-social a:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+.footer-bottom{
+  margin-top:48px;
+  padding:20px 0;
+  border-top:1px solid rgba(196,162,101,.04);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:960px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.footer-bottom p{
+  font-size:.52rem;
+  color:var(--dim2);
+  letter-spacing:.1em;
+}
+.footer-bottom a{
+  color:var(--gold-dim);
+  text-decoration:none;
+  font-size:.52rem;
+  font-style:italic;
+  transition:color .3s;
+}
+.footer-bottom a:hover{
+  color:var(--gold);
+}
 
 /* ============ FLOATING ============ */
 .kakao-float{position:fixed;bottom:28px;right:28px;width:50px;height:50px;border-radius:50%;background:#FEE500;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1.05rem;z-index:90;box-shadow:0 4px 20px rgba(0,0,0,.25);transition:all .4s cubic-bezier(.16,1,.3,1)}
@@ -222,15 +850,21 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   .hero-left{padding:0 36px 48px}
   .philo-cards{flex-direction:column;gap:10px}
   .info-layout{grid-template-columns:1fr 1fr;gap:32px}
+  .pick-card{grid-template-columns:260px 1fr;gap:32px}
+  .notes-grid{grid-template-columns:repeat(2,1fr)}.notes-grid .note-card:last-child{grid-column:1/-1;max-width:50%}
+  .pair-grid{grid-template-columns:repeat(2,1fr)}.pair-grid .pair-card:last-child{grid-column:1/-1;max-width:50%;margin:0 auto}
+  .footer-grid{grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+  .footer-grid .footer-col:last-child{grid-column:1/-1}
 }
 
 /* ============ WIDESCREEN ============ */
 @media(min-width:1400px){
-  .quote-section,.info-section,.mosaic-section,.menu-section{
+  .quote-section,.info-section,.mosaic-section,.menu-section,.pick-section,.notes-section,.pair-section,.faq-section,.event-banner,.reviews-section{
     padding-left:calc((100vw - 1200px)/2);padding-right:calc((100vw - 1200px)/2)}
   .slider-header{margin-left:calc((100vw - 1200px)/2 - 56px);max-width:600px}
   .slider-arrows{margin-left:calc((100vw - 1200px)/2 - 56px)}
   .slide{height:540px;flex:0 0 55%}
+  .footer-main{padding-left:calc((100vw - 1200px)/2);padding-right:calc((100vw - 1200px)/2)}
 }
 /* ============ RESPONSIVE ============ */
 @media(max-width:768px){
@@ -248,26 +882,76 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   .slide{flex:0 0 85%;height:280px;margin-right:2%}
   .slider-arrows{padding:16px 24px}
   .sl-arrow{width:40px;height:40px}
+  .pick-section{padding:60px 24px}
+  .pick-card{grid-template-columns:1fr;gap:0}
+  .pick-img{min-height:240px}
+  .pick-img::after{background:linear-gradient(180deg,transparent 60%,var(--bg) 100%)}
+  .pick-body{padding:28px 24px}
   .quote-section{padding:80px 24px}.quote-main{font-size:clamp(1.2rem,5vw,1.6rem)}.philo-cards{flex-direction:column;gap:10px}
+  .notes-section{padding:60px 24px}.notes-grid{grid-template-columns:1fr;gap:16px}
   .menu-section{padding:80px 24px}.menu-tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
   .m-tab{white-space:nowrap;padding:10px 20px;font-size:.82rem}
+  .wine-tags{gap:6px}.wine-tag{padding:5px 12px;font-size:.52rem}
+  .pair-section{padding:60px 24px}.pair-grid{grid-template-columns:1fr;gap:16px}
+  .faq-section{padding:60px 24px}
+  .event-banner{padding:36px 24px}
+  .reviews-section{padding:60px 24px}
+  .review-card{flex:0 0 280px}
   .mosaic-section{padding:60px 24px}.mosaic{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
   .mos-cell.wide{grid-column:span 1}.mos-cell.tall{grid-row:span 1}
   .info-section{padding:80px 24px}.info-layout{grid-template-columns:1fr;gap:28px}
-  footer{flex-direction:column;gap:8px;padding:28px 24px 100px}
+  .footer-main{padding:48px 24px 0}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;gap:8px;padding:16px 0 100px}
   .kakao-float{display:none}.mobile-bar{display:block}
+  .btt{bottom:80px;right:16px;width:36px;height:36px;font-size:.7rem}
   .lb-container{width:92vw;height:65vh}
   .lb-prev{left:8px}.lb-next{right:8px}
   .lb-nav{width:36px;height:36px}
   .lb-counter{top:20px;left:20px}
   .lb-close{top:16px;right:16px}
 }
+
+/* ============ REDUCED MOTION ============ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .preloader{display:none}
+  .rv{opacity:1;transform:none}
+  .hero-reveal{opacity:1;transform:none}
+}
 </style></head><body>
+
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <div class="pre-brand" id="preBrand"></div>
+  <div class="pre-line"></div>
+  <div class="pre-sub">Wine Bar &middot; Seochon</div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollBar"></div></div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" aria-label="맨 위로 이동" tabindex="0">&#8593;</button>
 
 <!-- CURSOR -->
 <div class="cur" id="cur"></div>
 <div class="cur-ring" id="ring"></div>
 <div class="cur-text" id="curText"></div>
+
+<!-- MOBILE OVERLAY -->
+<div class="mob-overlay" id="mobOverlay">
+  <a href="#gallery">Space</a>
+  <a href="#menu">Menu</a>
+  <a href="#notes">Wine Notes</a>
+  <a href="#pairing">Pairing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#info">Visit</a>
+  <a href="https://pf.kakao.com/_zAqqX_larouge" target="_blank" rel="noopener noreferrer">Contact</a>
+</div>
 
 <!-- SIDE NAV (데스크톱) -->
 <nav class="side-nav">
@@ -275,15 +959,18 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   <div class="sn-links">
     <a class="sn-link" href="#gallery">Space</a>
     <a class="sn-link" href="#menu">Menu</a>
+    <a class="sn-link" href="#notes">Notes</a>
+    <a class="sn-link" href="#pairing">Pairing</a>
+    <a class="sn-link" href="#faq">FAQ</a>
     <a class="sn-link" href="#info">Visit</a>
   </div>
-  <span class="sn-bottom">© 2025</span>
+  <span class="sn-bottom">&copy; 2025</span>
 </nav>
 
 <!-- TOP NAV (모바일) -->
 <nav class="top-nav">
   <a class="tn-logo" href="#">La Rouge</a>
-  <button class="hbg"><span></span><span></span><span></span></button>
+  <button class="hbg" id="hbg" aria-label="메뉴 열기" tabindex="0"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="main">
@@ -297,7 +984,7 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     <p class="hero-desc hero-reveal hr-d2">소믈리에가 고른 내추럴 와인,<br>바텐더가 만드는 시그니처 칵테일.<br>매일 저녁 6시, 서촌의 밤이 시작됩니다.</p>
     <div class="hero-ctas hero-reveal hr-d3">
       <a href="https://pf.kakao.com/_zAqqX_larouge" class="hcta hcta-fill" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>
-      <a href="#menu" class="hcta hcta-ghost">메뉴 보기 ↓</a>
+      <a href="#menu" class="hcta hcta-ghost">메뉴 보기 &#8595;</a>
     </div>
   </div>
   <div class="hero-right">
@@ -343,8 +1030,30 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     </div>
   </div>
   <div class="slider-arrows">
-    <button class="sl-arrow" id="slPrev">←</button>
-    <button class="sl-arrow" id="slNext">→</button>
+    <button class="sl-arrow" id="slPrev">&larr;</button>
+    <button class="sl-arrow" id="slNext">&rarr;</button>
+  </div>
+</section>
+
+<!-- ======== SOMMELIER'S PICK ======== -->
+<section class="pick-section rv" id="pick">
+  <div class="s-label">Sommelier's Pick</div>
+  <h2 class="s-title">이번 주 추천 와인</h2>
+  <div class="pick-card">
+    <div class="pick-img"></div>
+    <div class="pick-body">
+      <div class="pick-badge"><span class="pick-dot"></span>This Week's Pick</div>
+      <h3 class="pick-name">Domaine de la Bongran Viré-Clessé</h3>
+      <p class="pick-region">Burgundy, France &middot; 2020</p>
+      <p class="pick-grape">Chardonnay 100%</p>
+      <p class="pick-desc">잘 익은 배와 꿀, 은은한 미네랄이 조화를 이루는 부르고뉴 화이트. 오크 숙성 없이 포도 본연의 과실미를 느낄 수 있습니다.</p>
+      <span class="pick-price">Glass 18,000 &middot; Bottle 89,000</span>
+      <div class="pick-tags">
+        <span class="pick-tag">Natural</span>
+        <span class="pick-tag">Medium Body</span>
+        <span class="pick-tag">Mineral</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -373,6 +1082,50 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   </div>
 </section>
 
+<!-- ======== WINE TASTING NOTES ======== -->
+<section class="notes-section rv" id="notes">
+  <div class="s-label">Wine Notes</div>
+  <h2 class="s-title">테이스팅 프로필</h2>
+  <div class="notes-grid">
+    <div class="note-card rv">
+      <div class="note-type">Red</div>
+      <h3 class="note-name">Pinot Noir</h3>
+      <p class="note-region">Burgundy, France</p>
+      <p class="note-flavor">체리, 라즈베리, 흙내음, 은은한 오크</p>
+      <div class="note-bars">
+        <div class="note-bar"><span class="note-bar-label">Body</span><div class="note-bar-track"><div class="note-bar-fill" data-val="60"></div></div><span class="note-bar-val">60</span></div>
+        <div class="note-bar"><span class="note-bar-label">Tannin</span><div class="note-bar-track"><div class="note-bar-fill" data-val="45"></div></div><span class="note-bar-val">45</span></div>
+        <div class="note-bar"><span class="note-bar-label">Acidity</span><div class="note-bar-track"><div class="note-bar-fill" data-val="70"></div></div><span class="note-bar-val">70</span></div>
+        <div class="note-bar"><span class="note-bar-label">Sweet</span><div class="note-bar-track"><div class="note-bar-fill" data-val="15"></div></div><span class="note-bar-val">15</span></div>
+      </div>
+    </div>
+    <div class="note-card rv rv-d1">
+      <div class="note-type">White</div>
+      <h3 class="note-name">Sauvignon Blanc</h3>
+      <p class="note-region">Loire Valley, France</p>
+      <p class="note-flavor">자몽, 패션프루츠, 허브, 미네랄</p>
+      <div class="note-bars">
+        <div class="note-bar"><span class="note-bar-label">Body</span><div class="note-bar-track"><div class="note-bar-fill" data-val="35"></div></div><span class="note-bar-val">35</span></div>
+        <div class="note-bar"><span class="note-bar-label">Tannin</span><div class="note-bar-track"><div class="note-bar-fill" data-val="10"></div></div><span class="note-bar-val">10</span></div>
+        <div class="note-bar"><span class="note-bar-label">Acidity</span><div class="note-bar-track"><div class="note-bar-fill" data-val="85"></div></div><span class="note-bar-val">85</span></div>
+        <div class="note-bar"><span class="note-bar-label">Sweet</span><div class="note-bar-track"><div class="note-bar-fill" data-val="10"></div></div><span class="note-bar-val">10</span></div>
+      </div>
+    </div>
+    <div class="note-card rv rv-d2">
+      <div class="note-type">Orange</div>
+      <h3 class="note-name">Skin Contact</h3>
+      <p class="note-region">Georgia</p>
+      <p class="note-flavor">살구, 꿀, 호두, 차 향</p>
+      <div class="note-bars">
+        <div class="note-bar"><span class="note-bar-label">Body</span><div class="note-bar-track"><div class="note-bar-fill" data-val="70"></div></div><span class="note-bar-val">70</span></div>
+        <div class="note-bar"><span class="note-bar-label">Tannin</span><div class="note-bar-track"><div class="note-bar-fill" data-val="55"></div></div><span class="note-bar-val">55</span></div>
+        <div class="note-bar"><span class="note-bar-label">Acidity</span><div class="note-bar-track"><div class="note-bar-fill" data-val="60"></div></div><span class="note-bar-val">60</span></div>
+        <div class="note-bar"><span class="note-bar-label">Sweet</span><div class="note-bar-track"><div class="note-bar-fill" data-val="25"></div></div><span class="note-bar-val">25</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======== MENU ======== -->
 <section class="menu-section rv" id="menu">
   <div class="menu-inner">
@@ -387,32 +1140,144 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
   </div>
 
   <div class="tab-panel active" id="tab-wine">
-    <div class="mi"><div class="mi-row"><span class="mi-n">글라스 와인 <span class="mi-b">START</span></span><span class="mi-d"></span><span class="mi-p">12,000~</span></div><div class="mi-detail">소믈리에 추천 · 매주 변경</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">오늘의 화이트</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">프랑스 루아르 · 미네랄 드라이</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">오늘의 레드</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">이탈리아 피에몬테 · 라이트 바디</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">오렌지 와인</span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">조지아 전통 크베브리 방식</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">스파클링</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">페티앙 내추럴 · 미세 버블</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">보틀 와인</span><span class="mi-d"></span><span class="mi-p">55,000~</span></div><div class="mi-detail">80여 종 · 소믈리에 추천 가능</div></div>
+    <div class="wine-tags">
+      <button class="wine-tag active" data-filter="all">All</button>
+      <button class="wine-tag" data-filter="red">Red</button>
+      <button class="wine-tag" data-filter="white">White</button>
+      <button class="wine-tag" data-filter="orange">Orange</button>
+      <button class="wine-tag" data-filter="sparkling">Sparkling</button>
+    </div>
+    <div class="mi" data-type="all"><div class="mi-row"><span class="mi-n">글라스 와인 <span class="mi-b">START</span></span><span class="mi-d"></span><span class="mi-p">12,000~</span></div><div class="mi-detail">소믈리에 추천 &middot; 매주 변경</div></div>
+    <div class="mi" data-type="white"><div class="mi-row"><span class="mi-n">오늘의 화이트</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">프랑스 루아르 &middot; 미네랄 드라이</div></div>
+    <div class="mi" data-type="red"><div class="mi-row"><span class="mi-n">오늘의 레드</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">이탈리아 피에몬테 &middot; 라이트 바디</div></div>
+    <div class="mi" data-type="orange"><div class="mi-row"><span class="mi-n">오렌지 와인</span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">조지아 전통 크베브리 방식</div></div>
+    <div class="mi" data-type="sparkling"><div class="mi-row"><span class="mi-n">스파클링</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">페티앙 내추럴 &middot; 미세 버블</div></div>
+    <div class="mi" data-type="all"><div class="mi-row"><span class="mi-n">보틀 와인</span><span class="mi-d"></span><span class="mi-p">55,000~</span></div><div class="mi-detail">80여 종 &middot; 소믈리에 추천 가능</div></div>
   </div>
 
   <div class="tab-panel" id="tab-cocktail">
-    <div class="mi"><div class="mi-row"><span class="mi-n">서촌 선셋 <span class="mi-b">SIGNATURE</span></span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">캄파리 · 자몽 · 로즈마리 · 토닉</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">라루쥬 네그로니</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">진 · 캄파리 · 달콤 베르무트</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">매실 사워 <span class="mi-b">HOT</span></span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">위스키 · 자가제 매실청 · 레몬</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">제철 칵테일 <span class="mi-b">NEW</span></span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">계절 과일 기반 · 매달 변경</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">하이볼</span><span class="mi-d"></span><span class="mi-p">12,000</span></div><div class="mi-detail">산토리 위스키 · 탄산 · 레몬</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">서촌 선셋 <span class="mi-b">SIGNATURE</span></span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">캄파리 &middot; 자몽 &middot; 로즈마리 &middot; 토닉</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">라루쥬 네그로니</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">진 &middot; 캄파리 &middot; 달콤 베르무트</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">매실 사워 <span class="mi-b">HOT</span></span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">위스키 &middot; 자가제 매실청 &middot; 레몬</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">제철 칵테일 <span class="mi-b">NEW</span></span><span class="mi-d"></span><span class="mi-p">16,000</span></div><div class="mi-detail">계절 과일 기반 &middot; 매달 변경</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">하이볼</span><span class="mi-d"></span><span class="mi-p">12,000</span></div><div class="mi-detail">산토리 위스키 &middot; 탄산 &middot; 레몬</div></div>
     <div class="mi"><div class="mi-row"><span class="mi-n">논알콜 칵테일</span><span class="mi-d"></span><span class="mi-p">10,000</span></div><div class="mi-detail">자가제 과일청 + 토닉</div></div>
   </div>
 
   <div class="tab-panel" id="tab-plates">
-    <div class="mi"><div class="mi-row"><span class="mi-n">올리브 & 치즈 <span class="mi-b">PICK</span></span><span class="mi-d"></span><span class="mi-p">18,000</span></div><div class="mi-detail">카스텔베트라노 · 숙성 치즈 3종</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">브루스케타</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">리코타 · 무화과 · 프로슈토</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">하몽 플레이트</span><span class="mi-d"></span><span class="mi-p">22,000</span></div><div class="mi-detail">이베리코 하몽 · 그리시니</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">트뤼프 감자</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">트뤼프 오일 · 파르미지아노</div></div>
-    <div class="mi"><div class="mi-row"><span class="mi-n">오늘의 파스타</span><span class="mi-d"></span><span class="mi-p">19,000</span></div><div class="mi-detail">매일 변경 · 바텐더에게 문의</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">올리브 &amp; 치즈 <span class="mi-b">PICK</span></span><span class="mi-d"></span><span class="mi-p">18,000</span></div><div class="mi-detail">카스텔베트라노 &middot; 숙성 치즈 3종</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">브루스케타</span><span class="mi-d"></span><span class="mi-p">14,000</span></div><div class="mi-detail">리코타 &middot; 무화과 &middot; 프로슈토</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">하몽 플레이트</span><span class="mi-d"></span><span class="mi-p">22,000</span></div><div class="mi-detail">이베리코 하몽 &middot; 그리시니</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">트뤼프 감자</span><span class="mi-d"></span><span class="mi-p">15,000</span></div><div class="mi-detail">트뤼프 오일 &middot; 파르미지아노</div></div>
+    <div class="mi"><div class="mi-row"><span class="mi-n">오늘의 파스타</span><span class="mi-d"></span><span class="mi-p">19,000</span></div><div class="mi-detail">매일 변경 &middot; 바텐더에게 문의</div></div>
   </div>
   </div><!-- .menu-inner -->
 </section>
+
+<!-- ======== PAIRING GUIDE ======== -->
+<section class="pair-section rv" id="pairing">
+  <div class="s-label">Pairing Guide</div>
+  <h2 class="s-title">와인과 음식의 조화</h2>
+  <div class="pair-grid">
+    <div class="pair-card rv">
+      <div class="pair-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--wine-glow)" stroke-width="1.2"><circle cx="12" cy="14" r="7"/><path d="M12 7V3M9 5l3-2 3 2"/></svg></div>
+      <h4 class="pair-wine">Pinot Noir</h4>
+      <p class="pair-plus">&plus;</p>
+      <p class="pair-food">숙성 치즈 플레이트</p>
+      <p class="pair-desc">라이트 바디 레드와 숙성 치즈의 풍미가 서로를 끌어올립니다. 콩테, 그뤼에르 치즈와 함께.</p>
+    </div>
+    <div class="pair-card rv rv-d1">
+      <div class="pair-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2"><circle cx="12" cy="14" r="7"/><path d="M12 7V3M9 5l3-2 3 2"/></svg></div>
+      <h4 class="pair-wine">Sauvignon Blanc</h4>
+      <p class="pair-plus">&plus;</p>
+      <p class="pair-food">해산물 카르파초</p>
+      <p class="pair-desc">산미 높은 화이트와 신선한 해산물. 레몬 드레싱을 곁들인 참치 카르파초가 최고의 궁합.</p>
+    </div>
+    <div class="pair-card rv rv-d2">
+      <div class="pair-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dim)" stroke-width="1.2"><path d="M8 2h8l-4 9zM12 11v8M8 19h8"/></svg></div>
+      <h4 class="pair-wine">서촌 선셋 칵테일</h4>
+      <p class="pair-plus">&plus;</p>
+      <p class="pair-food">브루스케타</p>
+      <p class="pair-desc">캄파리의 쌉싸름함과 리코타 브루스케타의 부드러운 크리미함이 절묘하게 어우러집니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FAQ ======== -->
+<section class="faq-section rv" id="faq">
+  <div class="s-label">FAQ</div>
+  <h2 class="s-title">자주 묻는 질문</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>예약이 필요한가요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>아니요, 라루쥬는 워크인 전용입니다. 별도의 예약 없이 방문하시면 됩니다. 바 카운터 6석과 테이블 4석은 선착순으로 운영됩니다.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>콜키지 비용은 어떻게 되나요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>콜키지는 병당 20,000원입니다. 와인바 특성상 매장 와인 주문과 함께 이용해 주시면 감사하겠습니다.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>와인을 잘 모르는데 괜찮을까요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>물론이죠. 소믈리에가 취향과 기분에 맞는 와인을 추천해 드립니다. 글라스 와인으로 부담 없이 시작해 보세요.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>그룹 행사나 파티가 가능한가요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>소규모 공간이라 대형 행사는 어렵지만, 4~8명 정도의 와인 모임은 가능합니다. 카카오톡으로 미리 문의해 주세요.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>음식물 반입이 가능한가요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>외부 음식 반입은 불가합니다. 간단한 안주와 플레이트 메뉴를 준비하고 있으니 매장 메뉴를 이용해 주세요.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false" tabindex="0"><span>와인 구매가 가능한가요?</span><span class="faq-q-icon">+</span></button>
+      <div class="faq-a" role="region"><p>매장에서 드신 와인이 마음에 드셨다면, 보틀 구매도 가능합니다. 재고에 따라 다를 수 있으니 소믈리에에게 문의해 주세요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== EVENT BANNER ======== -->
+<section class="event-banner rv">
+  <div class="event-inner">
+    <div class="event-label">This Week at La Rouge</div>
+    <h3 class="event-title">이번 주 라루쥬</h3>
+    <p class="event-desc">매주 금요일 저녁 8시, 소믈리에와 함께하는 블라인드 테이스팅. 3종의 와인을 시음하며 와인 이야기를 나눕니다. 참가비 30,000원 (와인 3잔 + 치즈 플레이트 포함).</p>
+    <a href="https://pf.kakao.com/_zAqqX_larouge" class="event-cta" target="_blank" rel="noopener noreferrer">참가 문의 &rarr;</a>
+  </div>
+</section>
+
+<!-- ======== REVIEWS ======== -->
+<section class="reviews-section rv" id="reviews">
+  <div class="s-label">Reviews</div>
+  <h2 class="s-title">손님들의 이야기</h2>
+  <div class="reviews-track">
+    <div class="review-card rv">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"서촌에 이런 곳이 있었다니. 소믈리에 추천 글라스 와인이 정말 제 취향이었어요. 조용한 재즈와 촛불, 완벽한 저녁이었습니다."</p>
+      <div class="review-author">김지영</div>
+      <div class="review-date">2025.02</div>
+    </div>
+    <div class="review-card rv rv-d1">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"내추럴 와인에 관심이 생겨 방문했는데, 소믈리에님이 친절하게 설명해 주셔서 와인 초보도 편하게 즐길 수 있었어요."</p>
+      <div class="review-author">박준혁</div>
+      <div class="review-date">2025.01</div>
+    </div>
+    <div class="review-card rv rv-d2">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="review-text">"서촌 선셋 칵테일이 시그니처인 이유를 알겠어요. 캄파리와 자몽의 조합이 끝내줍니다. 분위기도 최고."</p>
+      <div class="review-author">이서연</div>
+      <div class="review-date">2025.03</div>
+    </div>
+    <div class="review-card rv rv-d3">
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+      <p class="review-text">"바 카운터에 앉아 소믈리에와 와인 이야기를 나누는 시간이 좋았습니다. 하몽 플레이트도 훌륭해요."</p>
+      <div class="review-author">최민수</div>
+      <div class="review-date">2024.12</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== PHOTO MOSAIC ======== -->
 <section class="mosaic-section rv">
   <div class="s-label">Photo</div>
   <h2 class="s-title" style="margin-bottom:32px">라루쥬의 밤</h2>
@@ -433,7 +1298,7 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     <div class="info-col">
       <h4>Address</h4>
       <p>서울 종로구 자하문로 00길 8, B1<br>경복궁역 2번 출구 도보 7분</p>
-      <a href="https://map.kakao.com" class="map-btn" target="_blank" rel="noopener noreferrer">카카오맵 →</a>
+      <a href="https://map.kakao.com" class="map-btn" target="_blank" rel="noopener noreferrer">카카오맵 &rarr;</a>
     </div>
     <div class="info-col">
       <h4>Hours</h4>
@@ -441,14 +1306,45 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
     </div>
     <div class="info-col">
       <h4>Note</h4>
-      <p>워크인 환영 · 예약 불필요<br>바 카운터석 선착순<br>20세 미만 입장 불가<br>콜키지 ₩20,000</p>
+      <p>워크인 환영 &middot; 예약 불필요<br>바 카운터석 선착순<br>20세 미만 입장 불가<br>콜키지 &#8361;20,000</p>
     </div>
   </div>
 </section>
 
-<footer>
-  <p>© 2025 La Rouge — Seochon</p>
-  <a href="https://instagram.com/larouge.bar" target="_blank" rel="noopener noreferrer">@larouge.bar →</a>
+<!-- ======== FOOTER ======== -->
+<footer class="footer-main">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">La Rouge</div>
+      <p>서촌 골목의 작은 와인바.<br>소믈리에가 고른 내추럴 와인과<br>바텐더의 시그니처 칵테일.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/larouge.bar" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+        <a href="https://pf.kakao.com/_zAqqX_larouge" target="_blank" rel="noopener noreferrer" aria-label="KakaoTalk">KT</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Menu</h5>
+      <a href="#gallery">공간 둘러보기</a>
+      <a href="#menu">와인 &amp; 칵테일</a>
+      <a href="#notes">테이스팅 노트</a>
+      <a href="#pairing">페어링 가이드</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </div>
+    <div class="footer-col">
+      <h5>Hours</h5>
+      <p>화 — 일 18:00 – 01:00<br>월요일 정기 휴무<br>라스트오더 00:00</p>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <p>서울 종로구 자하문로 00길 8, B1<br>경복궁역 2번 출구 도보 7분</p>
+      <a href="tel:02-000-0000">02-000-0000</a>
+      <a href="https://pf.kakao.com/_zAqqX_larouge" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 La Rouge — Seochon</p>
+    <a href="https://instagram.com/larouge.bar" target="_blank" rel="noopener noreferrer">@larouge.bar &rarr;</a>
+  </div>
 </footer>
 
 </div><!-- .main -->
@@ -472,69 +1368,120 @@ footer a{color:var(--gold-dim);text-decoration:none;font-size:.55rem;font-style:
 </div>
 
 <script>
-// CURSOR
-const cur=document.getElementById('cur'),ring=document.getElementById('ring'),ct=document.getElementById('curText');
-let mx=0,my=0,cx=0,cy=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function loop(){cx+=(mx-cx)*.2;cy+=(my-cy)*.2;rx+=(mx-rx)*.06;ry+=(my-ry)*.06;
-  cur.style.transform=`translate(${cx-2.5}px,${cy-2.5}px)`;
-  ring.style.transform=`translate(${rx-20}px,${ry-20}px)`;
-  ct.style.transform=`translate(${rx+26}px,${ry-8}px)`;
-  requestAnimationFrame(loop)})();
-document.querySelectorAll('[data-hover]').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.classList.add('hover');ct.textContent=el.dataset.hover;ct.classList.add('show')});
-  el.addEventListener('mouseleave',()=>{ring.classList.remove('hover');ct.classList.remove('show')});
+// ============ PRELOADER ============
+(function(){
+  var brand=document.getElementById('preBrand');
+  var text='La Rouge';
+  for(var i=0;i<text.length;i++){
+    var span=document.createElement('span');
+    span.className='pre-char';
+    span.style.animationDelay=(i*0.07)+'s';
+    span.textContent=text[i]===' '?'\u00A0':text[i];
+    brand.appendChild(span);
+  }
+  window.addEventListener('load',function(){
+    setTimeout(function(){document.getElementById('preloader').classList.add('done')},1400);
+  });
+})();
+
+// ============ SCROLL PROGRESS ============
+var scrollBar=document.getElementById('scrollBar');
+function updateScrollProgress(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  var pct=h>0?(window.scrollY/h)*100:0;
+  scrollBar.style.width=pct+'%';
+}
+
+// ============ TOAST ============
+function showToast(msg){
+  var container=document.getElementById('toastContainer');
+  var t=document.createElement('div');
+  t.className='toast';
+  t.textContent=msg;
+  container.appendChild(t);
+  requestAnimationFrame(function(){t.classList.add('show')});
+  setTimeout(function(){t.classList.remove('show');setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t)},400)},2800);
+}
+
+// ============ BACK TO TOP ============
+var bttBtn=document.getElementById('btt');
+function updateBtt(){bttBtn.classList.toggle('show',window.scrollY>600)}
+bttBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+
+// ============ MOBILE OVERLAY ============
+var hbgBtn=document.getElementById('hbg');
+var mobOverlay=document.getElementById('mobOverlay');
+hbgBtn.addEventListener('click',function(){
+  hbgBtn.classList.toggle('open');
+  mobOverlay.classList.toggle('open');
+  document.body.style.overflow=mobOverlay.classList.contains('open')?'hidden':'';
 });
-document.querySelectorAll('.sn-link,.hcta,.map-btn,.kakao-float,.lb-close,.lb-nav,.sl-arrow,.sl-zone').forEach(el=>{
-  el.addEventListener('mouseenter',()=>ring.classList.add('hover'));
-  el.addEventListener('mouseleave',()=>ring.classList.remove('hover'));
+mobOverlay.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){
+    hbgBtn.classList.remove('open');
+    mobOverlay.classList.remove('open');
+    document.body.style.overflow='';
+  });
 });
 
-// SLIDER (무한 루프 — moving 플래그 없이 clearTimeout 기반)
-const track=document.getElementById('sliderTrack');
-const origSlides=Array.from(track.querySelectorAll('.slide'));
-const total=origSlides.length;
-const firstClone=origSlides[0].cloneNode(true);
-const lastClone=origSlides[total-1].cloneNode(true);
+// ============ CURSOR ============
+var cur=document.getElementById('cur'),ring=document.getElementById('ring'),ct=document.getElementById('curText');
+var mx=0,my=0,cx=0,cy=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+(function loop(){cx+=(mx-cx)*.2;cy+=(my-cy)*.2;rx+=(mx-rx)*.06;ry+=(my-ry)*.06;
+  cur.style.transform='translate('+(cx-2.5)+'px,'+(cy-2.5)+'px)';
+  ring.style.transform='translate('+(rx-20)+'px,'+(ry-20)+'px)';
+  ct.style.transform='translate('+(rx+26)+'px,'+(ry-8)+'px)';
+  requestAnimationFrame(loop)})();
+document.querySelectorAll('[data-hover]').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ring.classList.add('hover');ct.textContent=el.dataset.hover;ct.classList.add('show')});
+  el.addEventListener('mouseleave',function(){ring.classList.remove('hover');ct.classList.remove('show')});
+});
+document.querySelectorAll('.sn-link,.hcta,.map-btn,.kakao-float,.lb-close,.lb-nav,.sl-arrow,.sl-zone,.btt,.wine-tag,.faq-q,.pair-card').forEach(function(el){
+  el.addEventListener('mouseenter',function(){ring.classList.add('hover')});
+  el.addEventListener('mouseleave',function(){ring.classList.remove('hover')});
+});
+
+// ============ SLIDER (무한 루프) ============
+var track=document.getElementById('sliderTrack');
+var origSlides=Array.from(track.querySelectorAll('.slide'));
+var total=origSlides.length;
+var firstClone=origSlides[0].cloneNode(true);
+var lastClone=origSlides[total-1].cloneNode(true);
 firstClone.removeAttribute('data-hover');lastClone.removeAttribute('data-hover');
 firstClone.classList.add('clone');lastClone.classList.add('clone');
 track.appendChild(firstClone);track.insertBefore(lastClone,track.firstChild);
 
-const allSlides=track.querySelectorAll('.slide');
-let idx=1,snapTimer=null;
+var allSlides=track.querySelectorAll('.slide');
+var idx=1,snapTimer=null;
 
 function getOffset(){if(window.innerWidth<=768)return 87;if(window.innerWidth>=1400)return 57;return 72}
 
 function applyVisuals(){
-  allSlides.forEach((s,i)=>{s.style.opacity=i===idx?'1':'.4'});
-  const real=((idx-1)%total+total)%total+1;
-  document.querySelectorAll('.slide-counter').forEach(c=>{c.textContent=`0${real} / 0${total}`});
+  allSlides.forEach(function(s,i){s.style.opacity=i===idx?'1':'.4'});
+  var real=((idx-1)%total+total)%total+1;
+  document.querySelectorAll('.slide-counter').forEach(function(c){c.textContent='0'+real+' / 0'+total});
 }
 
 function jumpTo(){
   track.style.transition='none';
-  track.style.transform=`translateX(-${idx*getOffset()}%)`;
+  track.style.transform='translateX(-'+idx*getOffset()+'%)';
   applyVisuals();
   void track.offsetHeight;
 }
 
-// 초기 위치
 jumpTo();
 
 function go(dir){
-  // 대기 중인 snap 취소
   if(snapTimer){clearTimeout(snapTimer);snapTimer=null}
-  // 현재 클론 위치면 먼저 snap
   if(idx<=0){idx=total;jumpTo()}
   else if(idx>=total+1){idx=1;jumpTo()}
-  // 이동
   idx+=dir;
   track.style.transition='transform .7s cubic-bezier(.16,1,.3,1)';
-  track.style.transform=`translateX(-${idx*getOffset()}%)`;
+  track.style.transform='translateX(-'+idx*getOffset()+'%)';
   applyVisuals();
-  // 클론 도착 시 snap 예약
   if(idx<=0||idx>=total+1){
-    snapTimer=setTimeout(()=>{
+    snapTimer=setTimeout(function(){
       if(idx<=0)idx=total;else if(idx>=total+1)idx=1;
       jumpTo();
       snapTimer=null;
@@ -542,120 +1489,165 @@ function go(dir){
   }
 }
 
-document.getElementById('slPrev').onclick=()=>go(-1);
-document.getElementById('slNext').onclick=()=>go(1);
-document.getElementById('slZonePrev').onclick=()=>go(-1);
-document.getElementById('slZoneNext').onclick=()=>go(1);
+document.getElementById('slPrev').onclick=function(){go(-1)};
+document.getElementById('slNext').onclick=function(){go(1)};
+document.getElementById('slZonePrev').onclick=function(){go(-1)};
+document.getElementById('slZoneNext').onclick=function(){go(1)};
 
-// 활성 슬라이드 클릭 → 라이트박스
-allSlides.forEach((s,i)=>{s.addEventListener('click',e=>{
+allSlides.forEach(function(s,i){s.addEventListener('click',function(e){
   if(s.classList.contains('clone'))return;
-  // 클릭 영역(zone) 위에서 온 이벤트가 아닌 경우에만
   if(e.target.closest('.sl-zone'))return;
-  if(i===idx){const real=((idx-1)%total+total)%total;openLb(real)}
+  if(i===idx){var real=((idx-1)%total+total)%total;openLb(real)}
 })});
 
-// 키보드 (라이트박스 미열린 경우만)
-document.addEventListener('keydown',e=>{
+document.addEventListener('keydown',function(e){
   if(document.getElementById('lb').classList.contains('open'))return;
   if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1);
 });
-// 터치
-let stx;track.addEventListener('touchstart',e=>{stx=e.touches[0].clientX},{passive:true});
-track.addEventListener('touchend',e=>{const diff=stx-e.changedTouches[0].clientX;if(Math.abs(diff)>40)go(diff>0?1:-1)},{passive:true});
-window.addEventListener('resize',()=>jumpTo());
+var stx;track.addEventListener('touchstart',function(e){stx=e.touches[0].clientX},{passive:true});
+track.addEventListener('touchend',function(e){var diff=stx-e.changedTouches[0].clientX;if(Math.abs(diff)>40)go(diff>0?1:-1)},{passive:true});
+window.addEventListener('resize',function(){jumpTo()});
 
-// MENU TABS
-document.querySelectorAll('.m-tab').forEach(tab=>{
-  tab.addEventListener('click',()=>{
-    document.querySelectorAll('.m-tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+// ============ MENU TABS ============
+document.querySelectorAll('.m-tab').forEach(function(tab){
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.m-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
     tab.classList.add('active');
     document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
   });
 });
 
-// SCROLL REVEAL
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target)}})},{threshold:.05,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+// ============ WINE FILTER TAGS ============
+document.querySelectorAll('.wine-tag').forEach(function(tag){
+  tag.addEventListener('click',function(){
+    document.querySelectorAll('.wine-tag').forEach(function(t){t.classList.remove('active')});
+    tag.classList.add('active');
+    var filter=tag.dataset.filter;
+    document.querySelectorAll('#tab-wine .mi').forEach(function(mi){
+      var type=mi.dataset.type;
+      if(filter==='all'||type==='all'||type===filter){
+        mi.classList.remove('wine-hidden');
+      }else{
+        mi.classList.add('wine-hidden');
+      }
+    });
+  });
+});
 
-// SIDE NAV active + scrolled
-const sideNav=document.querySelector('.side-nav');
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.sn-link');
-window.addEventListener('scroll',()=>{
+// ============ FAQ ACCORDION ============
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=q.closest('.faq-item');
+    var wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(fi){fi.classList.remove('open');fi.querySelector('.faq-q').setAttribute('aria-expanded','false')});
+    if(!wasOpen){item.classList.add('open');q.setAttribute('aria-expanded','true')}
+  });
+});
+
+// ============ SCROLL REVEAL ============
+var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target)}})},{threshold:.05,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+
+// ============ NOTE BAR ANIMATION ============
+var barObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.querySelectorAll('.note-bar-fill').forEach(function(bar){
+        bar.style.width=bar.dataset.val+'%';
+      });
+      barObs.unobserve(entry.target);
+    }
+  });
+},{threshold:.2});
+document.querySelectorAll('.note-card').forEach(function(card){barObs.observe(card)});
+
+// ============ SIDE NAV ACTIVE + SCROLLED ============
+var sideNav=document.querySelector('.side-nav');
+var sections=document.querySelectorAll('section[id]');
+var navLinks=document.querySelectorAll('.sn-link');
+
+function onScroll(){
   if(sideNav)sideNav.classList.toggle('scrolled',scrollY>100);
-  let curSec='';sections.forEach(s=>{if(scrollY>=s.offsetTop-200)curSec=s.id});
-  navLinks.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+curSec)});
-},{passive:true});
+  var curSec='';
+  sections.forEach(function(s){if(scrollY>=s.offsetTop-200)curSec=s.id});
+  navLinks.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+curSec)});
+  updateScrollProgress();
+  updateBtt();
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+
+// ============ TOAST ON CONTACT CLICKS ============
+document.querySelectorAll('.mobile-bar a[href^="tel:"]').forEach(function(a){
+  a.addEventListener('click',function(){showToast('전화 연결 중...')});
+});
+document.querySelectorAll('a[href*="pf.kakao.com"]').forEach(function(a){
+  a.addEventListener('click',function(){showToast('카카오톡으로 이동합니다')});
+});
 
 // ============ LIGHTBOX ============
-const lb=document.getElementById('lb'),lbInner=document.getElementById('lbInner'),lbTitle=document.getElementById('lbTitle'),lbDesc=document.getElementById('lbDesc'),lbCap=document.getElementById('lbCap'),lbCount=document.getElementById('lbCount');
-const lbItems=[];let lbIdx=0;
-const bgMap={
+var lb=document.getElementById('lb'),lbInner=document.getElementById('lbInner'),lbTitle=document.getElementById('lbTitle'),lbDesc=document.getElementById('lbDesc'),lbCap=document.getElementById('lbCap'),lbCount=document.getElementById('lbCount');
+var lbItems=[];var lbIdx=0;
+var bgMap={
   'sl-bg-1':'url(https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=1200&q=80) center/cover no-repeat','sl-bg-2':'url(https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?w=1200&q=80) center/cover no-repeat',
   'sl-bg-3':'url(https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=1200&q=80) center/cover no-repeat','sl-bg-4':'url(https://images.unsplash.com/photo-1504275107627-0c2ba7a43dba?w=1200&q=80) center/cover no-repeat',
   'ms-1':'url(https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&q=80) center/cover no-repeat','ms-2':'url(https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80) center/cover no-repeat',
   'ms-3':'url(https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=1200&q=80) center/cover no-repeat','ms-4':'url(https://images.unsplash.com/photo-1536935338788-846bb9981813?w=1200&q=80) center/cover no-repeat'
 };
 
-
-// 슬라이더 원본 4장 수집
-origSlides.forEach(s=>{
-  const inner=s.querySelector('.slide-inner');
-  const cap=s.querySelector('.slide-caption');
-  const cls=[...inner.classList].find(c=>c.startsWith('sl-bg-'))||'';
-  lbItems.push({bg:cls,title:cap?.querySelector('h3')?.textContent||'',desc:cap?.querySelector('p')?.textContent||''});
+origSlides.forEach(function(s){
+  var inner=s.querySelector('.slide-inner');
+  var cap=s.querySelector('.slide-caption');
+  var cls=[].slice.call(inner.classList).find(function(c){return c.startsWith('sl-bg-')})||'';
+  lbItems.push({bg:cls,title:cap&&cap.querySelector('h3')?cap.querySelector('h3').textContent:'',desc:cap&&cap.querySelector('p')?cap.querySelector('p').textContent:''});
 });
-// 모자이크 6셀 수집
-const mosLen=lbItems.length;
-document.querySelectorAll('.mos-cell').forEach((cell,i)=>{
-  const inner=cell.querySelector('.mos-inner');
-  const cls=[...inner.classList].find(c=>c.startsWith('ms-'))||'';
+var mosLen=lbItems.length;
+document.querySelectorAll('.mos-cell').forEach(function(cell,i){
+  var inner=cell.querySelector('.mos-inner');
+  var cls=[].slice.call(inner.classList).find(function(c){return c.startsWith('ms-')})||'';
   lbItems.push({bg:cls,title:'',desc:''});
   cell.style.cursor='pointer';
-  cell.addEventListener('click',()=>openLb(mosLen+i));
+  cell.addEventListener('click',function(){openLb(mosLen+i)});
 });
 
 function openLb(i){lbIdx=i;renderLb();lb.classList.add('open');document.body.style.overflow='hidden';
-  const kf=document.querySelector('.kakao-float');if(kf)kf.style.display='none'}
+  var kf=document.querySelector('.kakao-float');if(kf)kf.style.display='none'}
 function closeLb(){lb.classList.remove('open');document.body.style.overflow='';
-  const kf=document.querySelector('.kakao-float');if(kf)kf.style.display=''}
+  var kf=document.querySelector('.kakao-float');if(kf)kf.style.display=''}
 function renderLb(){
-  const item=lbItems[lbIdx];if(!item)return;
+  var item=lbItems[lbIdx];if(!item)return;
   lbInner.style.opacity='0';
-  setTimeout(()=>{lbInner.style.background=bgMap[item.bg]||'var(--surface)';lbInner.innerHTML='';lbInner.style.opacity='1'},150);
+  setTimeout(function(){lbInner.style.background=bgMap[item.bg]||'var(--surface)';lbInner.textContent='';lbInner.style.opacity='1'},150);
   if(item.title){lbCap.style.display='';lbTitle.textContent=item.title;lbDesc.textContent=item.desc}
   else{lbCap.style.display='none'}
-  lbCount.textContent=`${lbIdx+1} / ${lbItems.length}`;
+  lbCount.textContent=(lbIdx+1)+' / '+lbItems.length;
 }
 document.getElementById('lbClose').addEventListener('click',closeLb);
-document.getElementById('lbPrev').addEventListener('click',()=>{lbIdx=(lbIdx-1+lbItems.length)%lbItems.length;renderLb()});
-document.getElementById('lbNext').addEventListener('click',()=>{lbIdx=(lbIdx+1)%lbItems.length;renderLb()});
-lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
-document.addEventListener('keydown',e=>{
+document.getElementById('lbPrev').addEventListener('click',function(){lbIdx=(lbIdx-1+lbItems.length)%lbItems.length;renderLb()});
+document.getElementById('lbNext').addEventListener('click',function(){lbIdx=(lbIdx+1)%lbItems.length;renderLb()});
+lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+document.addEventListener('keydown',function(e){
   if(!lb.classList.contains('open'))return;
   if(e.key==='Escape')closeLb();
   if(e.key==='ArrowLeft'){lbIdx=(lbIdx-1+lbItems.length)%lbItems.length;renderLb()}
   if(e.key==='ArrowRight'){lbIdx=(lbIdx+1)%lbItems.length;renderLb()}
 });
-// Touch swipe (lightbox)
-let ltx=0;
-lb.addEventListener('touchstart',e=>{ltx=e.touches[0].clientX},{passive:true});
-lb.addEventListener('touchend',e=>{
-  const dx=e.changedTouches[0].clientX-ltx;
+var ltx=0;
+lb.addEventListener('touchstart',function(e){ltx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',function(e){
+  var dx=e.changedTouches[0].clientX-ltx;
   if(Math.abs(dx)>50){if(dx<0)lbIdx=(lbIdx+1)%lbItems.length;else lbIdx=(lbIdx-1+lbItems.length)%lbItems.length;renderLb()}
 });
 
-// IMAGE ASSET PROTECTION
-document.addEventListener('contextmenu',e=>{
+// ============ IMAGE ASSET PROTECTION ============
+document.addEventListener('contextmenu',function(e){
   if(e.target.closest('.slide,.mos-cell,.lb-overlay,img'))e.preventDefault();
 });
-document.addEventListener('dragstart',e=>{
+document.addEventListener('dragstart',function(e){
   if(e.target.tagName==='IMG'||e.target.closest('.slide,.mos-cell,.lb-overlay'))e.preventDefault();
 });
 
-// 포트폴리오 프리뷰용 자동스크롤 (iframe 안에 있을 때만 작동)
+// ============ PORTFOLIO PREVIEW AUTO-SCROLL ============
 var _isPreview=false;try{_isPreview=window.self!==window.top}catch(e){_isPreview=true}
 if(_isPreview){
   var _asY=0,_asSpd=2.25,_asPaused=false;
