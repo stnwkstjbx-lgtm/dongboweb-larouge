@@ -206,6 +206,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
   padding:100px 56px;
   border-top:1px solid rgba(196,162,101,.04);
 }
+.pick-rotation{font-size:.78rem;color:var(--dim);line-height:1.8;margin-top:12px;font-weight:300;letter-spacing:.02em}
+.pick-rotation b{color:var(--gold);font-weight:400}
 .pick-card{
   display:grid;
   grid-template-columns:320px 1fr;
@@ -314,6 +316,18 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
   background:rgba(122,40,50,.1);
   border-color:rgba(122,40,50,.5);
 }
+
+/* ============ NATURAL WINE EXPLAINER ============ */
+.natural-explainer{max-width:680px;margin:48px auto 0;padding:28px 32px;border:1px solid rgba(196,162,101,.08);border-radius:2px;background:rgba(196,162,101,.02)}
+.ne-row{display:flex;align-items:stretch;gap:0}
+.ne-col{flex:1;padding:16px}
+.ne-col p{font-size:.72rem;color:var(--dim);line-height:1.9;font-weight:300}
+.ne-highlight{background:rgba(122,40,50,.06);border-left:2px solid var(--wine)}
+.ne-highlight p{color:var(--fg2)}
+.ne-label{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px;font-weight:400}
+.ne-vs{display:flex;align-items:center;font-family:var(--serif);font-size:.7rem;font-style:italic;color:var(--gold-dim);padding:0 12px}
+.ne-note{font-size:.68rem;color:var(--dim);text-align:center;margin-top:16px;font-weight:300;letter-spacing:.02em}
+@media(max-width:768px){.ne-row{flex-direction:column}.ne-vs{padding:8px 0;justify-content:center}.ne-highlight{border-left:none;border-top:2px solid var(--wine)}}
 
 /* ============ QUOTE / PHILOSOPHY ============ */
 .quote-section{padding:140px 56px;position:relative;border-top:1px solid rgba(196,162,101,.04);border-bottom:1px solid rgba(196,162,101,.04);overflow:hidden}
@@ -619,6 +633,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
   line-height:2;
   font-weight:200;
 }
+.event-list{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.event-item{display:flex;align-items:center;gap:16px;font-size:.76rem;color:rgba(240,235,228,.85)}
+.event-when{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;background:rgba(240,235,228,.1);padding:4px 10px;white-space:nowrap;min-width:90px;text-align:center}
+.event-what{font-family:var(--serif);font-style:italic;font-size:.88rem;font-weight:300;flex:1}
+.event-detail{font-size:.66rem;color:rgba(240,235,228,.5);white-space:nowrap}
+@media(max-width:768px){.event-item{flex-wrap:wrap;gap:6px}.event-when{min-width:auto}.event-detail{width:100%;padding-left:0}}
 .event-cta{
   display:inline-flex;
   margin-top:20px;
@@ -1039,11 +1059,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 <!-- ======== SOMMELIER'S PICK ======== -->
 <section class="pick-section rv" id="pick">
   <div class="s-label">Sommelier's Pick</div>
-  <h2 class="s-title">소믈리에가 고른 와인</h2>
+  <h2 class="s-title">이달의 셀렉션</h2>
+  <p class="pick-rotation">매달 소믈리에가 직접 시음하고 고른 와인. 3월의 테마는 <b>봄의 화이트</b>입니다.</p>
   <div class="pick-card">
     <div class="pick-img"></div>
     <div class="pick-body">
-      <div class="pick-badge"><span class="pick-dot"></span>Sommelier's Pick</div>
+      <div class="pick-badge"><span class="pick-dot"></span>March Selection</div>
       <h3 class="pick-name">Domaine de la Bongran Viré-Clessé</h3>
       <p class="pick-region">Burgundy, France &middot; 2020</p>
       <p class="pick-grape">Chardonnay 100%</p>
@@ -1063,6 +1084,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
   <p class="quote-main">좋은 와인은 설명하지 않아도<br>한 모금에 이야기가 느껴집니다.</p>
   <p class="quote-sub">대량 생산 와인이 아닌, 생산자의 철학이 담긴 내추럴 와인만 셀렉합니다.<br>직접 시음하고, 직접 고르고, 그 와인이 가장 맛있는 온도로 서빙합니다.</p>
   <span class="quote-attr">— Sommelier, La Rouge</span>
+
+  <!-- 내추럴 와인 간단 설명 -->
+  <div class="natural-explainer rv">
+    <div class="ne-row"><div class="ne-col"><div class="ne-label">일반 와인</div><p>화학 비료 재배, 상업 효모 사용, 이산화황(SO₂) 다량 첨가, 필터링·청징 처리</p></div>
+    <div class="ne-vs">vs</div>
+    <div class="ne-col ne-highlight"><div class="ne-label">내추럴 와인</div><p>유기농 재배, 야생 효모 자연 발효, SO₂ 최소 또는 무첨가, 무필터·무청징</p></div></div>
+    <p class="ne-note">라루쥬는 생산자를 직접 만나고 시음한 내추럴 와인만 셀렉합니다.</p>
+  </div>
 
   <div class="philo-cards">
     <div class="pc" data-hover="Detail">
@@ -1239,9 +1268,25 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 <!-- ======== EVENT BANNER ======== -->
 <section class="event-banner rv">
   <div class="event-inner">
-    <div class="event-label">Every Friday at La Rouge</div>
-    <h3 class="event-title">금요일 블라인드 테이스팅</h3>
-    <p class="event-desc">매주 금요일 저녁 8시, 소믈리에와 함께하는 블라인드 테이스팅. 3종의 와인을 시음하며 와인 이야기를 나눕니다. 참가비 30,000원 (와인 3잔 + 치즈 플레이트 포함).</p>
+    <div class="event-label">La Rouge Events</div>
+    <h3 class="event-title">함께 즐기는 와인</h3>
+    <div class="event-list">
+      <div class="event-item">
+        <span class="event-when">매주 금</span>
+        <span class="event-what">블라인드 테이스팅</span>
+        <span class="event-detail">와인 3잔 + 치즈 &middot; 30,000원</span>
+      </div>
+      <div class="event-item">
+        <span class="event-when">매월 첫째주 토</span>
+        <span class="event-what">와인 입문 클래스</span>
+        <span class="event-detail">내추럴 와인 기초 &middot; 45,000원</span>
+      </div>
+      <div class="event-item">
+        <span class="event-when">분기 1회</span>
+        <span class="event-what">와인메이커 디너</span>
+        <span class="event-detail">5코스 + 페어링 &middot; 120,000원</span>
+      </div>
+    </div>
     <a href="https://pf.kakao.com/_zAqqX_larouge" class="event-cta" target="_blank" rel="noopener noreferrer">참가 문의 &rarr;</a>
   </div>
 </section>
